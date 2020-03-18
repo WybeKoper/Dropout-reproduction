@@ -42,9 +42,9 @@ model.add(Dropout(0.5))
 model.add(Dense(10, activation = "softmax"))
 
 
-model.compile(optimizer = 'sgd' , loss = "categorical_crossentropy", metrics=["accuracy"])
+model.compile(optimizer = 'adam' , loss = "categorical_crossentropy", metrics=["accuracy"])
 
-history = model.fit(x_train, y_train, epochs=20, batch_size=32, validation_split=0.1666666667, verbose=2)
+history = model.fit(x_train, y_train, epochs=50, batch_size=32, validation_split=0.1666666666, verbose=2)
 
 print("--- %s seconds ---" % (time.time() - start_time))
 
