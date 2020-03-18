@@ -4,9 +4,8 @@ from tensorflow.keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPool2D
 import matplotlib.pyplot as plt
 from tensorflow.keras.utils import to_categorical
 import time
+
 start_time = time.time()
-
-
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
 #Data visualization
@@ -32,7 +31,7 @@ y_test = to_categorical(y_test)
 
 # Defining the model
 model = Sequential()
-model.add(Dropout(0.8))
+model.add(Dropout(0.2))
 model.add(Dense(1024, activation = "relu", input_shape = (784,)))
 model.add(Dropout(0.5))
 
@@ -44,7 +43,7 @@ model.add(Dense(10, activation = "softmax"))
 
 model.compile(optimizer = 'adam' , loss = "categorical_crossentropy", metrics=["accuracy"])
 
-history = model.fit(x_train, y_train, epochs=50, batch_size=32, validation_split=0.1666666666, verbose=2)
+history = model.fit(x_train, y_train, epochs=100, batch_size=1000, validation_split=0.1666666666, verbose=2)
 
 print("--- %s seconds ---" % (time.time() - start_time))
 
