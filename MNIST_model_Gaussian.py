@@ -4,6 +4,7 @@ from tensorflow.keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPool2D
 import matplotlib.pyplot as plt
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.layers import GaussianDropout
+from tensorflow.keras.constraints import max_norm
 import time
 start_time = time.time()
 
@@ -34,13 +35,13 @@ y_test = to_categorical(y_test)
 # Defining the model
 model = Sequential()
 model.add(GaussianDropout(0.2))
-model.add(Dense(1024, activation = "relu", input_shape = (784,)))
+model.add(Dense(1024, activation = "relu", input_shape = (784,), kernel_constraint=max_norm(2), bias_constraint=max_norm(2)))
 model.add(GaussianDropout(0.5))
 
-model.add(Dense(1024, activation = "relu"))
+model.add(Dense(1024, activation = "relu", kernel_constraint=max_norm(2), bias_constraint=max_norm(2)))
 model.add(GaussianDropout(0.5))
 
-model.add(Dense(10, activation = "softmax"))
+model.add(Dense(10, activation = "softmax", kernel_constraint=max_norm(2), bias_constraint=max_norm(2)))
 
 
 model.compile(optimizer = 'adam' , loss = "categorical_crossentropy", metrics=["accuracy"])
