@@ -1,1 +1,0 @@
-Please open all files in google colab for proper viewing. 
